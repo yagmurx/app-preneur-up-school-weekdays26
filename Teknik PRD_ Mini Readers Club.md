@@ -33,6 +33,7 @@ MVP aşamasında hız, "premium" his ve esneklik (vendor lock-in'den kaçınma) 
 FastAPI üzerinden Supabase'e yazılacak ilişkisel veri modeli (ERD) aşağıdaki gibidir.
 
 | **Tablo Adı** | **Sütun (Column)** | **Veri Tipi** | **Özellikler / Kısıtlamalar** | **Açıklama** |
+| --- | --- | --- | --- |---|
 
 | **users** | id | UUID | Primary Key, Auto-gen | Kullanıcının eşsiz kimliği |
 
