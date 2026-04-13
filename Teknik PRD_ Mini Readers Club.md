@@ -6,7 +6,7 @@
 
 **Platform:** Sadece iOS (Native)
 
-**Hazırlayan:** Teknik Product Owner
+**Hazırlayan:** Yağmur YILDIZ PARILTI
 
 **Durum:** Onaylandı
 
