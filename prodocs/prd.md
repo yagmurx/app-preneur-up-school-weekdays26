@@ -6,7 +6,7 @@
 
 **Platform:** Sadece iOS (Native)
 
-**Hazırlayan:** Yağmur YILDIZ PARILTI
+**Hazırlayan:** Teknik Product Owner
 
 **Durum:** Onaylandı
 
@@ -33,51 +33,50 @@ MVP aşamasında hız, "premium" his ve esneklik (vendor lock-in'den kaçınma) 
 FastAPI üzerinden Supabase'e yazılacak ilişkisel veri modeli (ERD) aşağıdaki gibidir.
 
 | **Tablo Adı** | **Sütun (Column)** | **Veri Tipi** | **Özellikler / Kısıtlamalar** | **Açıklama** |
-| --- | --- | --- | --- |---|
-
+| --- | --- | --- | --- | --- |
 | **users** | id | UUID | Primary Key, Auto-gen | Kullanıcının eşsiz kimliği |
 
-| | apple\_sub\_id | VARCHAR | Unique, Not Null | Apple Sign-in'den dönen benzersiz ID |
+| apple\_sub\_id | VARCHAR | Unique, Not Null | Apple Sign-in'den dönen benzersiz ID |
 
-| | email | VARCHAR | Unique | Apple'dan dönen gizlenmiş/açık email |
+| email | VARCHAR | Unique | Apple'dan dönen gizlenmiş/açık email |
 
-| | created\_at | TIMESTAMPTZ | Default: NOW() | Kayıt tarihi |
+| created\_at | TIMESTAMPTZ | Default: NOW() | Kayıt tarihi |
 
 | **children** | id | UUID | Primary Key, Auto-gen | Çocuğun eşsiz kimliği |
 
-| | parent\_id | UUID | Foreign Key \-\> users(id) | Hangi ebeveyne ait olduğu |
+|  parent\_id | UUID | Foreign Key \-\> users(id) | Hangi ebeveyne ait olduğu |
 
-| | name | VARCHAR(50) | Not Null | Çocuğun adı |
+|  name | VARCHAR(50) | Not Null | Çocuğun adı |
 
-| | birth\_date | DATE | Not Null | Yaş hesabı ve kürasyon için |
+| birth\_date | DATE | Not Null | Yaş hesabı ve kürasyon için |
 
-| | avatar\_color | VARCHAR(7) | Default: '\#E5E7EB' | UI'da çocuğu ayırt etmek için hex kod |
+| avatar\_color | VARCHAR(7) | Default: '\#E5E7EB' | UI'da çocuğu ayırt etmek için hex kod |
 
 | **books** | id | UUID | Primary Key, Auto-gen | Kitabın sistemdeki ID'si |
 
-| | isbn | VARCHAR(20) | Unique, Index | Barkod no (Hızlı arama için indeksli) |
+|  isbn | VARCHAR(20) | Unique, Index | Barkod no (Hızlı arama için indeksli) |
 
-| | title | VARCHAR(200) | Not Null | Kitap adı (Google API'den çekilen) |
+| title | VARCHAR(200) | Not Null | Kitap adı (Google API'den çekilen) |
 
-| | author | VARCHAR(100) | Nullable | Yazar adı |
+| author | VARCHAR(100) | Nullable | Yazar adı |
 
-| | cover\_url | TEXT | Nullable | Kapak görseli (Google API url'i) |
+|  cover\_url | TEXT | Nullable | Kapak görseli (Google API url'i) |
 
 | **reading\_logs** | id | UUID | Primary Key, Auto-gen | Okuma kaydı ID'si |
 
-| | child\_id | UUID | Foreign Key \-\> children(id) | Kitabı okuyan çocuk |
+|  child\_id | UUID | Foreign Key \-\> children(id) | Kitabı okuyan çocuk |
 
-| | book\_id | UUID | Foreign Key \-\> books(id) | Okunan kitap |
+| book\_id | UUID | Foreign Key \-\> books(id) | Okunan kitap |
 
-| | logged\_at | TIMESTAMPTZ | Default: NOW() | Ne zaman eklendiği |
+| logged\_at | TIMESTAMPTZ | Default: NOW() | Ne zaman eklendiği |
 
 | **milestones** | id | UUID | Primary Key, Auto-gen | Kazanılan rozet kaydı |
 
-| | child\_id | UUID | Foreign Key \-\> children(id) | Rozeti kazanan çocuk |
+|  child\_id | UUID | Foreign Key \-\> children(id) | Rozeti kazanan çocuk |
 
-| | threshold | INT | Not Null (Örn: 10, 25, 50\) | Hangi barajın aşıldığı |
+| threshold | INT | Not Null (Örn: 10, 25, 50\) | Hangi barajın aşıldığı |
 
-| | unlocked\_at | TIMESTAMPTZ | Default: NOW() | Rozetin açılma zamanı |
+| unlocked\_at | TIMESTAMPTZ | Default: NOW() | Rozetin açılma zamanı |
 
 ## **4\. API UÇ NOKTALARI (FASTAPI \- REST/JSON)**
 
